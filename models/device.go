@@ -10,7 +10,7 @@ import (
 
 type Device struct {
 	ID            uint   `gorm:"primary_key" json:"id"`
-	ProviderID    uint   `json:"provider_id" binding:"required" gorm:"not null`
+	ProviderID    uint   `json:"provider_id" binding:"required" gorm:"not null"`
 	Imei          string `gorm:"not null;unique"`
 	Mpn           string
 	Name          string

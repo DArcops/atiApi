@@ -6,6 +6,7 @@ import (
 )
 
 var devices *gin.RouterGroup
+var device *gin.RouterGroup
 
 func devicesRoutes() {
 	devices = provider.Group("devices")
@@ -13,4 +14,7 @@ func devicesRoutes() {
 	devices.GET("", V1.GetDevices)
 	devices.POST("", V1.AddDevice)
 	devices.POST("/upload_file", V1.UploadDevicesFromFile)
+
+	device = devices.Group("/:device_id")
+	device.Use(middlewares.Device)
 }
