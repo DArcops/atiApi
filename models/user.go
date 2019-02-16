@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/darcops/dialgorithm-server/modules/encrypt"
+	"github.com/darcops/atiApi/modules/encrypt"
 )
 
 type User struct {

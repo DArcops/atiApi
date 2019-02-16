@@ -1,8 +1,8 @@
 package routes
 
 import (
-	V1 "github.com/darcops/dialgorithm-server/controllers/v1"
-	"github.com/darcops/dialgorithm-server/middlewares"
+	V1 "github.com/darcops/atiApi/controllers/v1"
+	"github.com/darcops/atiApi/middlewares"
 	"github.com/gin-gonic/gin"
 )
 

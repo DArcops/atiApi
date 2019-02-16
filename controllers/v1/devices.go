@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/darcops/dialgorithm-server/models"
+	"github.com/darcops/atiApi/models"
 	"github.com/entropyx/sara/models/errors"
 	"github.com/gin-gonic/gin"
 )

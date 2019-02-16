@@ -7,7 +7,7 @@ import (
 
 	b64 "encoding/base64"
 
-	"github.com/darcops/dialgorithm-server/models"
+	"github.com/darcops/atiApi/models"
 	"github.com/gin-gonic/gin"
 )
 

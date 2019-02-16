@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/darcops/dialgorithm-server/models"
-	"github.com/darcops/dialgorithm-server/routes"
+	"github.com/darcops/atiApi/models"
+	"github.com/darcops/atiApi/routes"
 )
 
 func main() {
