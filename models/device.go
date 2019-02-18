@@ -16,12 +16,15 @@ type Device struct {
 	Name          string
 	IsAssigned    bool
 	AdmissionDate string
+	Ubication     string
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	UpdatedAt     *time.Time `json:"updated_at,omitempty"`
 	DeletedAt     *time.Time `sql:"index" json:"deleted_at,omitempty"`
 }
 
 func (d *Device) Create() error {
+	d.IsAssigned = false
+	d.Ubication = "in stock"
 	return db.Create(d).Error
 }
 
@@ -66,6 +69,7 @@ func SaveDevicesFromFile(file *multipart.FileHeader, p *Provider) error {
 			Name:          row[bucket["nombre"]],
 			IsAssigned:    false,
 			AdmissionDate: row[bucket["fecha de ingreso"]],
+			Ubication:     "in stock",
 		}).Error; err != nil {
 			tx.Rollback()
 			return err

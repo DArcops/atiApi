@@ -3,7 +3,7 @@ package v1
 import (
 	"net/http"
 
-	"github.com/darcops/dialgorithm-server/models"
+	"github.com/darcops/atiApi/models"
 )
 
 var (

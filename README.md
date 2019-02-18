@@ -1,4 +1,4 @@
-# dialgorithm-server
+# atiApi
 atiApi
 
 #API for evaltech web app:
