@@ -2,7 +2,6 @@ package v1
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/darcops/dialgorithm-server/models"
 	"github.com/entropyx/sara/models/errors"
@@ -12,22 +11,7 @@ import (
 func GetDevices(c *gin.Context) {
 	provider := c.MustGet("provider").(*models.Provider)
 
-	strFrom := c.Query("from")
-	strTo := c.Query("to")
-
-	from, err := strconv.ParseInt(strFrom, 10, 64)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, nil)
-		return
-	}
-
-	to, err := strconv.ParseInt(strTo, 10, 64)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, nil)
-		return
-	}
-
-	devices, err := provider.GetDevices(from, to)
+	devices, err := provider.GetDevices()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, nil)
 		return
