@@ -11,6 +11,11 @@ import (
 
 var db *gorm.DB
 
+func init() {
+	Connect()
+	Migrate()
+}
+
 var tables = []interface{}{
 	&User{},
 	&Provider{},
@@ -51,6 +56,8 @@ func Migrate() {
 }
 
 func Create(value interface{}) *gorm.DB {
+	fmt.Println("DB", db)
+	fmt.Println("JODA", value)
 	return db.Create(value)
 }
 

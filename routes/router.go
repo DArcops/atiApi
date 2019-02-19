@@ -24,7 +24,7 @@ func init() {
 	router.Use(cors.Middleware(cors.Config{
 		Origins:         "*",
 		Methods:         "GET,POST,DELETE,PUT",
-		RequestHeaders:  "Origin, Authorization, Content-Type",
+		RequestHeaders:  "Origin, Authorization, Content-Type, Access-Control-Allow-Origin",
 		ExposedHeaders:  "",
 		MaxAge:          50 * time.Second,
 		Credentials:     true,
@@ -34,7 +34,7 @@ func init() {
 	userRoutes()
 	providerRoutes()
 	devicesRoutes()
-	assigmentsRoutes()
+	// assigmentsRoutes()
 
 	router.Run(":8088")
 }
