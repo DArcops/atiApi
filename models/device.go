@@ -9,14 +9,14 @@ import (
 )
 
 type Device struct {
-	ID            uint   `gorm:"primary_key" json:"id"`
-	ProviderID    uint   `json:"provider_id" binding:"required" gorm:"not null"`
-	Imei          string `gorm:"not null;unique"`
-	Mpn           string
-	Name          string
-	IsAssigned    bool
-	AdmissionDate string
-	Ubication     string
+	ID            uint       `gorm:"primary_key" json:"id"`
+	ProviderID    uint       `json:"provider_id" binding:"required" gorm:"not null"`
+	Imei          string     `json:"imei" binding:"required" gorm:"not null;unique"`
+	Mpn           string     `json:"mpn,omitempty"`
+	Name          string     `json:"name,omitempty"`
+	IsAssigned    bool       `json:"is_assigned,omitempty"`
+	AdmissionDate string     `json:"admission_date,omitempty"`
+	Ubication     string     `json:"ubication,omitempty"`
 	CreatedAt     *time.Time `json:"created_at,omitempty"`
 	UpdatedAt     *time.Time `json:"updated_at,omitempty"`
 	DeletedAt     *time.Time `sql:"index" json:"deleted_at,omitempty"`
