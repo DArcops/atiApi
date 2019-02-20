@@ -18,6 +18,12 @@ func GetProviders(c *gin.Context) {
 	c.JSON(http.StatusOK, providers)
 }
 
+func GetProvider(c *gin.Context) {
+	provider := c.MustGet("provider").(*models.Provider)
+
+	c.JSON(http.StatusOK, provider)
+}
+
 func AddProvider(c *gin.Context) {
 	var provider = new(models.Provider)
 
