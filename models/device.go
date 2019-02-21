@@ -68,6 +68,10 @@ func SaveDevicesFromFile(file *multipart.FileHeader, p *Provider) error {
 			continue
 		}
 
+		if row[bucket["imei"]] == "" {
+			continue
+		}
+
 		if err := tx.Create(&Device{
 			ProviderID:    p.ID,
 			Imei:          row[bucket["imei"]],

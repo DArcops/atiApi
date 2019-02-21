@@ -20,6 +20,7 @@ var tables = []interface{}{
 	&User{},
 	&Provider{},
 	&Device{},
+	&Assigment{},
 }
 
 func Connect() {
@@ -63,4 +64,8 @@ func Create(value interface{}) *gorm.DB {
 
 func First(out interface{}, where ...interface{}) *gorm.DB {
 	return db.First(out, where...)
+}
+
+func Find(out interface{}, where ...interface{}) *gorm.DB {
+	return db.Find(out, where...)
 }

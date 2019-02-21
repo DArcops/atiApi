@@ -8,7 +8,7 @@ import (
 
 type User struct {
 	ID        uint       `gorm:"primary_key" json:"id"`
-	Name      string     `json:"username"`
+	Name      string     `json:"username" gorm:"not null;unique" binding:"required"`
 	Email     string     `gorm:"not null;unique" json:"email" binding:"required"`
 	Password  string     `json:"pass,omitempty" binding:"required"`
 	CanWrite  bool       `json:"administrator"`
@@ -28,4 +28,10 @@ func GenerateToken(message []byte) ([]byte, error) {
 
 func (u User) AddNewAdmin(email string) error {
 	return db.Model(&User{}).Where("email = ?", email).Update("can_write", true).Error
+}
+
+func GetAllUsers() []User {
+	users := []User{}
+	db.Select("name").Find(&users)
+	return users
 }

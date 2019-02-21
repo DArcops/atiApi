@@ -15,12 +15,14 @@ func GetProviders(c *gin.Context) {
 		return
 	}
 
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusOK, providers)
 }
 
 func GetProvider(c *gin.Context) {
 	provider := c.MustGet("provider").(*models.Provider)
 
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusOK, provider)
 }
 
@@ -37,5 +39,6 @@ func AddProvider(c *gin.Context) {
 		return
 	}
 
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusCreated, provider)
 }

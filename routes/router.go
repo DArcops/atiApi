@@ -14,7 +14,7 @@ var (
 )
 
 func init() {
-	router = gin.New()
+	router = gin.Default()
 	api = router.Group("api")
 	v1 = api.Group("v1")
 

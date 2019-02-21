@@ -1,7 +1,6 @@
 package v1
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -12,7 +11,10 @@ import (
 )
 
 func GetUsers(c *gin.Context) {
-	fmt.Println("aqui se devolveran los usuarios")
+	users := models.GetAllUsers()
+
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.JSON(http.StatusCreated, users)
 }
 
 func Register(c *gin.Context) {
@@ -28,8 +30,8 @@ func Register(c *gin.Context) {
 		return
 	}
 
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusCreated, gin.H{})
-	return
 }
 
 func Login(c *gin.Context) {
@@ -52,6 +54,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusOK, gin.H{
 		"token":      b64.StdEncoding.EncodeToString(token),
 		"user_name":  user.Name,

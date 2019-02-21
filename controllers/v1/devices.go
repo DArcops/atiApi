@@ -2,7 +2,6 @@ package v1
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 
 	"github.com/darcops/atiApi/models"
@@ -34,6 +33,8 @@ func AddDevice(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, nil)
 		return
 	}
+
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusCreated, device)
 }
 
@@ -46,12 +47,11 @@ func UploadDevicesFromFile(c *gin.Context) {
 		return
 	}
 
-	fmt.Println("QUEEEE PEDOOO", file.Filename)
-
 	if err := models.SaveDevicesFromFile(file, provider); err != nil {
 		c.JSON(http.StatusInternalServerError, nil)
 		return
 	}
 
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusOK, nil)
 }
