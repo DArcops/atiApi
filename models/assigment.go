@@ -15,7 +15,13 @@ type Assigment struct {
 }
 
 func (a *Assigment) Create() error {
-	return db.Create(a).Error
+	if err := db.Create(a).Error; err != nil {
+		return err
+	}
+	for i := 0; i < len(a.Devices); i++ {
+		db.Model(&Device{}).Where("imei = ?", a.Devices[i].Imei).Update("assigment_id", a.ID)
+	}
+	return nil
 }
 
 func GetAssigments(device *Device) ([]Assigment, error) {
