@@ -16,4 +16,5 @@ func providerRoutes() {
 
 	provider = providers.Group("/:provider_id")
 	provider.Use(middlewares.Provider)
+	provider.GET("", V1.GetProvider)
 }
