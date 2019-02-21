@@ -2,6 +2,7 @@ package models
 
 import (
 	"encoding/csv"
+	"fmt"
 	"io"
 	"mime/multipart"
 	"strings"
@@ -49,6 +50,7 @@ func SaveDevicesFromFile(file *multipart.FileHeader, p *Provider) error {
 	rd := csv.NewReader(reader)
 
 	countrows := 0
+	fmt.Println("Provider id", p.ID)
 
 	for {
 		row, err := rd.Read()
@@ -56,10 +58,13 @@ func SaveDevicesFromFile(file *multipart.FileHeader, p *Provider) error {
 			break
 		}
 
+		fmt.Println("ROWW", row)
+
 		if countrows == 0 {
 			for i := 0; i < len(row); i++ {
 				bucket[strings.ToLower(row[i])] = i
 			}
+			countrows++
 			continue
 		}
 

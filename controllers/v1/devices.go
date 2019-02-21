@@ -2,6 +2,7 @@ package v1
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/darcops/atiApi/models"
@@ -44,6 +45,8 @@ func UploadDevicesFromFile(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, errors.New(err.Error()))
 		return
 	}
+
+	fmt.Println("QUEEEE PEDOOO", file.Filename)
 
 	if err := models.SaveDevicesFromFile(file, provider); err != nil {
 		c.JSON(http.StatusInternalServerError, nil)
