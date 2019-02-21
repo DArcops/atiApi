@@ -23,14 +23,13 @@ func GetAssigments(c *gin.Context) {
 
 func AddAssigment(c *gin.Context) {
 	var assigment = new(models.Assigment)
-	device := c.MustGet("device").(*models.Device)
 
 	if err := c.Bind(assigment); err != nil {
 		c.JSON(http.StatusBadRequest, err)
 		return
 	}
 
-	if err := assigment.Create(device); err != nil {
+	if err := assigment.Create(); err != nil {
 		c.JSON(http.StatusInternalServerError, nil)
 		return
 	}

@@ -34,7 +34,7 @@ func init() {
 	userRoutes()
 	providerRoutes()
 	devicesRoutes()
-	// assigmentsRoutes()
+	assigmentsRoutes()
 
 	router.Run(":8088")
 }

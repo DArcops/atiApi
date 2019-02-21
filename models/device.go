@@ -15,6 +15,7 @@ type Device struct {
 	Mpn           string     `json:"mpn,omitempty"`
 	Name          string     `json:"name,omitempty"`
 	IsAssigned    bool       `json:"is_assigned,omitempty"`
+	AssigmentID   uint       `json:"assigment_id,omitempty"`
 	AdmissionDate string     `json:"admission_date,omitempty"`
 	Ubication     string     `json:"ubication,omitempty"`
 	CreatedAt     *time.Time `json:"created_at,omitempty"`

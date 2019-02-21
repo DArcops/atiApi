@@ -3,20 +3,18 @@ package models
 import "time"
 
 type Assigment struct {
-	ID          uint `gorm:"primary_key" json:"id"`
-	DeviceID    uint `json:"device_id" binding:"required" gorm:"not null"`
-	UserID      uint `json:"user_id" binding:"required" gorm:"not null"`
-	Description string
-	Ubication   string
+	ID          uint       `gorm:"primary_key" json:"id"`
+	Devices     []Device   `json:"devices" gorm:"foreignkey:AssigmentID"`
+	UserID      uint       `json:"user_id" binding:"required" gorm:"not null"`
+	Description string     `json:"description" binding:"required"`
+	Ubication   string     `json:"ubication" binding:"required"`
 	EndDate     string     `json:"end_date" binding:"required" gorm:"not null"`
 	CreatedAt   *time.Time `json:"created_at,omitempty"`
 	UpdatedAt   *time.Time `json:"updated_at,omitempty"`
 	DeletedAt   *time.Time `sql:"index" json:"deleted_at,omitempty"`
 }
 
-func (a *Assigment) Create(device *Device) error {
-	db.Model(device).Where("id = ?", device.ID).Update("ubication", a.Ubication)
-	db.Model(device).Where("id = ?", device.ID).Update("is_assigned", true)
+func (a *Assigment) Create() error {
 	return db.Create(a).Error
 }
 
@@ -26,7 +24,13 @@ func GetAssigments(device *Device) ([]Assigment, error) {
 }
 
 func (a *Assigment) Get() error {
-	return db.First(a, "id = ?", a.ID).Error
+	devices := []Device{}
+	db.Find(&devices, "assigment_id = ?", a.ID)
+	if err := db.First(a, "id = ?", a.ID).Error; err != nil {
+		return err
+	}
+	a.Devices = devices
+	return nil
 }
 
 func (a *Assigment) Delete(device *Device) error {

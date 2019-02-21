@@ -1,10 +1,10 @@
 package v1
 
 import (
+	"errors"
 	"net/http"
 
 	"github.com/darcops/atiApi/models"
-	"github.com/entropyx/sara/models/errors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,7 +40,7 @@ func UploadDevicesFromFile(c *gin.Context) {
 
 	file, err := c.FormFile("file")
 	if err != nil {
-		errors.JSON(c, errors.BadRequest(err.Error()))
+		c.JSON(http.StatusBadRequest, errors.New(err.Error()))
 		return
 	}
 
