@@ -57,7 +57,7 @@ func AddAssigment(c *gin.Context) {
 
 	assigment := &models.Assigment{
 		Devices:     devices,
-		UserID:      user.ID,
+		Username:    req.AssignedUser,
 		Description: req.Description,
 		EndDate:     req.EndDate,
 	}
@@ -76,6 +76,7 @@ func GetAssigment(c *gin.Context) {
 
 	id, err := strconv.ParseInt(strID, 10, 64)
 	if err != nil {
+		c.Header("Access-Control-Allow-Origin", "*")
 		c.JSON(http.StatusBadRequest, errors.New("Invalid assigment id"))
 		return
 	}
@@ -83,10 +84,12 @@ func GetAssigment(c *gin.Context) {
 	assigment := &models.Assigment{ID: uint(id)}
 
 	if err := assigment.Get(); err != nil {
+		c.Header("Access-Control-Allow-Origin", "*")
 		c.JSON(http.StatusInternalServerError, nil)
 		return
 	}
 
+	c.Header("Access-Control-Allow-Origin", "*")
 	c.JSON(http.StatusOK, assigment)
 }
 

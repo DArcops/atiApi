@@ -6,7 +6,7 @@ type Assigment struct {
 	ID           uint       `gorm:"primary_key" json:"id"`
 	Devices      []Device   `json:"devices" gorm:"foreignkey:AssigmentID"`
 	UserAssigned User       `gorm:"-" json:"user_assigned"`
-	UserID       uint       `json:"user_id" binding:"required" gorm:"not null"`
+	Username     string     `json:"username" binding:"required" gorm:"not null"`
 	Description  string     `json:"description" binding:"required"`
 	Ubication    string     `json:"ubication" binding:"required"`
 	ProviderID   string     `json:"provider_id"`
@@ -33,10 +33,13 @@ func GetAssigments(provider *Provider) ([]Assigment, error) {
 
 func (a *Assigment) Get() error {
 	devices := []Device{}
+	user := &User{}
+
 	db.Find(&devices, "assigment_id = ?", a.ID)
 	if err := db.First(a, "id = ?", a.ID).Error; err != nil {
 		return err
 	}
+	db.Find(&user, "name = ?", a.Username)
 	a.Devices = devices
 	return nil
 }
