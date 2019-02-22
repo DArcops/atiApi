@@ -79,7 +79,7 @@ func SaveDevicesFromFile(file *multipart.FileHeader, p *Provider) error {
 			Name:          row[bucket["nombre"]],
 			IsAssigned:    false,
 			AdmissionDate: row[bucket["fecha de ingreso"]],
-			Ubication:     "in stock",
+			Ubication:     row[bucket["ubicacion"]],
 		}).Error; err != nil {
 			tx.Rollback()
 			return err
