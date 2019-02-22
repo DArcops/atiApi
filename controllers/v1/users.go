@@ -35,14 +35,18 @@ func Register(c *gin.Context) {
 }
 
 func Login(c *gin.Context) {
-	var user models.User
+	var user = new(models.User)
+	req := struct {
+		Email string `json:"email" binding:"required"`
+		Pass  string `json:"pass" binding:"required"`
+	}{}
 
-	if err := c.Bind(&user); err != nil {
+	if err := c.Bind(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{})
 		return
 	}
 
-	if models.First(&user, "email = ? and password = ?", user.Email, user.Password).RecordNotFound() {
+	if models.First(user, "email = ? and password = ?", req.Email, req.Pass).RecordNotFound() {
 		c.JSON(http.StatusForbidden, gin.H{})
 		return
 	}
