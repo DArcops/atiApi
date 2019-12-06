@@ -38,6 +38,8 @@ func AddAssigment(c *gin.Context) {
 		return
 	}
 
+	aux := req.Imeis[0]
+
 	for _, i := range req.Imeis {
 		device := models.Device{}
 		if models.First(&device, "imei = ? and provider_id = ?", i, p.ID).RecordNotFound() {
